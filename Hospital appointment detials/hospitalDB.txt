@@ -1,0 +1,109 @@
+
+Doctor Appointment Booking System Database	
+	-31stMay2023
+
+Specializations
+This table stores all specializations
+
+spec_id			char(4)
+spec_tile		v(20)		PEDT/CARD/ORTH/GNRL/GASE/NUER
+spec_desc		v(200)
+
+Doctors
+This table stores all doctors
+
+doct_id			int		PK_DOCT
+doct_name		
+doct_qaul		v(20)
+doct_spec_id		char(4)		FK(PK_SPEC)
+doct_exp		numeric		//no of years exp
+doct_photo		image/blob
+doct_cfee		numeric
+
+DoctorSchedule
+This table stores all doctor schedule
+
+doct_id			int
+weekday			char(3)		ALL/MON/TUE/WED/.....MWF/TTS/MTF/MTS
+dcsc_timefrom		char(4)		1030
+dcsc_timeto		char(4)		1330
+scsc_avgat		numeric		// Average appointment time
+
+Appointments
+This table stores all appointments booked
+
+appn_id			int		PK_APPN
+appn_doct_id		int
+appn_patn_id		int
+appn_booked_Date	datetime
+appn_sch_date		datetime
+appn_paymode		varchar(20)
+appn_payreference	varchar(50)
+appn_payamount		numeric
+appn_status		char(4)		YETO/CMPLD/NTRN
+
+
+Patients
+This table stores all Patient details
+
+patn_id			int
+patn_name		v(100)
+patn_age
+patn_gender
+patn_bgroup		char(2)
+patn_rdate		date		//reg date
+patn_lastvisit		date
+patn_lastapp_id		int		
+
+PatientFamilymembers
+This table stores various family members associated with PAtients
+
+patn_id			int
+pfmb_index		tinyint
+pfmb_name		v(50)
+pfmb_relation		v(50)
+pfmb_age		smallint
+
+PatientMedicalProfile
+This table stores all Parameters of patients
+
+patn_id			int
+patn_appn_id		int		FK
+patn_parameter		varchar(50)		Weight/BP/Cholestral
+patn_pargroup		varchar(50)	BP/GEN/
+patn_value		varchar(100)
+
+
+Tests
+this table stores various diagnostic tests available
+
+test_id			int
+test_name		v(100)
+test_catg_id		char(6)
+test_price		numeric
+test_method		varchar(100)
+test_normalrangefrom	varchar2(100)
+test_normalrangeto	varchar2(100)
+
+PatientDiagnosis
+This table stores Diagnostic bills for patients
+
+dgbl_id			int
+dgbl_patn_id		int		FK(PK_PATN)
+dgbl_date		date
+dgbl_amount		numeric		//total amount
+dgbl_appn_id		int		can be null
+
+PatientDianogisticTests
+This table maps different test carried under dianognosis.
+
+dgbl_id			int
+dgbl_test_id		int
+dgbl_test_price		numeric
+
+PatientDiagnonisticReports
+This table maps report pdfs
+
+dgbl_id			int
+dgdr_index		tinyint
+dgdr_path		v(100)

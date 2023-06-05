@@ -1,0 +1,110 @@
+Doctor Appointment Booking System 		
+	-1st Jun 2023
+
+Users of the Project
+
+Admin Users
+Patients
+Diagnostic Center Users
+
+		***** Options for Admin Users ******
+
+Sign In
+	Sign Up
+	Sign In
+	Change pwd
+	Forgot pwd
+
+Master Entry
+	Specializations
+		-ENT, General Physisican, Cardio, Orthepedic
+	Doctors
+		- Feeding Doctors and their specializations
+		- Doctors Schedule
+		- Flexibility - Week day wise, different time slots
+Appointments
+
+	Booked Appointments
+		- View all appointments between dates
+		- Filter - doctor wise, date wise, specialization wise
+		- Patient Wise
+		- Suspend Appointments & Refund the payment
+
+	New Appointment
+			- Available Schedule on a specfic date & time *****
+			- Book the appointment and make the payment
+			- Appointment for self or family member
+	Patient Profile Update
+		- Post Consultation Update
+	
+	Payments
+		- Doctor Wise
+		- Date Wise
+
+Reports
+
+
+		***** Options for Admin-DC Users ******
+
+Sign In
+	Sign Up
+	Sign In
+	Change pwd
+	Forgot pwd
+
+Master Entry
+	Test Categories
+		- Info
+	Tests
+		- Master Info
+Diagnostic Tests
+	- NEw Test Bills
+		- User should be able to select various tests
+		- Based on that bill has to be generated.
+	- Test Reports
+		- Feed/Upload Test Reports
+		- Associated PAtient details
+
+Patients
+	Patients View
+		- Test Wise
+		- Between Dates	
+
+Reports
+	
+
+User Management
+	Admin users
+	roles & Permissions
+
+Options of the Project
+
+		***** Patient Options *******
+
+Sign In
+	Sign Up
+	Sign In
+	Change pwd
+	Forgot pwd
+
+Dashboard
+	Appointments(OP Consultation)
+		- Completed
+			- Completed Bookings
+		- Upcoming			
+			- Here all upcoming bookings
+			-Reschedule/Postpone appointment
+		- New Appointment
+			- Available Schedule on a specfic date & time *****
+			- Book the appointment and make the payment
+			- Appointment for self or family member
+	Profile
+		- Patient Profile
+		- Patient family members
+			- View members
+			- Add members/edit/delete
+		
+	Diagnostic Test
+		- Various Tests 
+		- Test Reports
+

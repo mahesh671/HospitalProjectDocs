@@ -1,0 +1,19 @@
+Doctor Appointment System
+
+users
+
+	-Doctor
+	-Patient
+
+=> Options
+
+Dashboard
+
+Appointments
+
+Patients
+
+Master Entry
+	Specializations
+	Doctors
+Reports
