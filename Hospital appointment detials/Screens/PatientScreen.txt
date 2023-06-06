@@ -1,0 +1,106 @@
+-----------------------------------------------------
+                     Patient Page
+-----------------------------------------------------
+
+[Logo]                     [Username]  [Sign Out]
+
+-----------------------------------------------------
+                        Navigation
+-----------------------------------------------------
+
+[Dashboard]    [Appointments]    [Profile]    [Diagnostic Tests]
+
+-----------------------------------------------------
+                      Patient Dashboard
+-----------------------------------------------------
+
+[Welcome, Patient User!]
+
+[Upcoming Appointments]
+----------------------------------------
+|  Appointment ID |  Doctor Name |  Date    |
+----------------------------------------
+|  001            |  Dr. Smith   |  2023-06-10 |
+|  002            |  Dr. Johnson |  2023-06-12 |
+|  003            |  Dr. Lee     |  2023-06-15 |
+|  ...           |  ...         |  ...       |
+----------------------------------------
+
+[Recent Payments]
+----------------------------------------
+|  Payment ID |  Doctor Name |  Amount  |
+----------------------------------------
+|  001        |  Dr. Smith   |  $100    |
+|  002        |  Dr. Johnson |  $150    |
+|  003        |  Dr. Lee     |  $80     |
+|  ...       |  ...         |  ...     |
+----------------------------------------
+
+[Quick Actions]
+- Schedule Appointment
+- Update Profile
+- View Diagnostic Reports
+
+-----------------------------------------------------
+                   Appointments
+-----------------------------------------------------
+
+[Filter Options: Doctor | Date | Specialization]
+
+[Search Bar]
+
+[Appointments List]
+----------------------------------------
+|  Appointment ID |  Doctor Name |  Date    |
+----------------------------------------
+|  001            |  Dr. Smith   |  2023-06-10 |
+|  002            |  Dr. Johnson |  2023-06-12 |
+|  003            |  Dr. Lee     |  2023-06-15 |
+|  ...           |  ...          |  ...       |
+----------------------------------------
+
+[Actions: Reschedule | Cancel]
+
+-----------------------------------------------------
+                      Profile
+-----------------------------------------------------
+
+[Patient Information]
+- Name: John Doe
+- Age: 35
+- Gender: Male
+- Blood Group: O+
+
+[Contact Information]
+- Email: johndoe@example.com
+- Phone: +1 123-456-7890
+
+[Family Members]
+------------------------------------
+|  Index |  Name       |  Relation  |
+------------------------------------
+|  1     |  Jane Doe   |  Spouse    |
+|  2     |  Sarah Doe  |  Child     |
+|  3     |  Mark Doe   |  Sibling   |
+|  ...   |  ...        |  ...       |
+------------------------------------
+
+[Actions: Edit Profile | Add Family Member | Edit Family Member | Delete Family Member]
+
+-----------------------------------------------------
+               Diagnostic Tests
+-----------------------------------------------------
+
+[Available Tests]
+----------------------------------------
+|  Test ID |  Test Name       |  Price  |
+----------------------------------------
+|  001     |  Blood Test      |  $50    |
+|  002     |  X-Ray           |  $80    |
+|  003     |  MRI Scan        |  $200   |
+|  ...    |  ...             |  ...    |
+----------------------------------------
+
+[Actions: Book Test]
+
+-----------------------------------------------------

@@ -1,0 +1,128 @@
+-----------------------------------------------------
+                     Admin Page
+-----------------------------------------------------
+
+[Logo]                     [Username]  [Sign Out]
+
+-----------------------------------------------------
+                        Navigation
+-----------------------------------------------------
+
+[Dashboard]    [Appointments]    [Doctors]    [Specializations]    [Reports]    [User Management]
+
+-----------------------------------------------------
+                      Admin Dashboard
+-----------------------------------------------------
+
+[Welcome, Admin User!]
+
+[Total Appointments: 50]      [Total Doctors: 20]      [Total Patients: 100]
+
+[Upcoming Appointments]
+----------------------------------------
+|  Appointment ID |  Doctor Name |  Date    |
+----------------------------------------
+|  001            |  Dr. Smith   |  2023-06-10 |
+|  002            |  Dr. Johnson |  2023-06-12 |
+|  003            |  Dr. Lee     |  2023-06-15 |
+|  ...           |  ...         |  ...       |
+----------------------------------------
+
+[Recent Payments]
+----------------------------------------
+|  Payment ID |  Doctor Name |  Amount  |
+----------------------------------------
+|  001        |  Dr. Smith   |  $100    |
+|  002        |  Dr. Johnson |  $150    |
+|  003        |  Dr. Lee     |  $80     |
+|  ...       |  ...         |  ...     |
+----------------------------------------
+
+[Quick Actions]
+- Add New Doctor
+- Schedule Appointment
+- Generate Report
+
+-----------------------------------------------------
+                   Appointments
+-----------------------------------------------------
+
+[Filter Options: Doctor | Date | Specialization]
+
+[Search Bar]
+
+[Appointments List]
+----------------------------------------
+|  Appointment ID |  Patient Name |  Date    |
+----------------------------------------
+|  001            |  John Doe     |  2023-06-10 |
+|  002            |  Jane Smith   |  2023-06-12 |
+|  003            |  Mark Johnson |  2023-06-15 |
+|  ...           |  ...          |  ...       |
+----------------------------------------
+
+[Actions: Edit | Cancel | Refund]
+
+-----------------------------------------------------
+                      Doctors
+-----------------------------------------------------
+
+[Add New Doctor]
+
+[Doctors List]
+----------------------------------------
+|  Doctor ID |  Doctor Name |  Specialization |
+----------------------------------------
+|  001       |  Dr. Smith   |  Cardiology     |
+|  002       |  Dr. Johnson |  Pediatrics     |
+|  003       |  Dr. Lee     |  Orthopedics    |
+|  ...      |  ...         |  ...            |
+----------------------------------------
+
+[Actions: Edit | Delete]
+
+-----------------------------------------------------
+                 Specializations
+-----------------------------------------------------
+
+[Add New Specialization]
+
+[Specializations List]
+-----------------------------
+|  ID |  Title    |  Description |
+-----------------------------
+|  001 |  ENT      |  Ear, Nose, and Throat |
+|  002 |  Card     |  Cardiology |
+|  003 |  Ortho    |  Orthopedics |
+|  ... |  ...     |  ... |
+-----------------------------
+
+[Actions: Edit | Delete]
+
+-----------------------------------------------------
+                       Reports
+-----------------------------------------------------
+
+[Generate Appointment Report]
+[Generate Payment Report]
+[Generate Doctor Report]
+
+-----------------------------------------------------
+                 User Management
+-----------------------------------------------------
+
+[Add New Admin User]
+
+[Admin Users List]
+---------------------------------
+|  Username  |  Role  |  Actions |
+---------------------------------
+|  admin1    |  Admin |  Edit    |
+|  admin2    |  Staff |  Edit    |
+|  admin3    |  Staff |  Edit    |
+|  ...      |  ...   |  ...     |
+---------------------------------
+
+[Roles & Permissions]
+
+-----------------------------------------------------

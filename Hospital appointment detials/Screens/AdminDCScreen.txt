@@ -1,0 +1,79 @@
+-----------------------------------------------------
+               Admin-DC Screen
+-----------------------------------------------------
+
+[Logo]                     [Username]  [Sign Out]
+
+-----------------------------------------------------
+                        Navigation
+-----------------------------------------------------
+
+[Dashboard]    [Tests]    [Diagnostic Center Users]    [Reports]
+
+-----------------------------------------------------
+                    Admin-DC Dashboard
+-----------------------------------------------------
+
+[Welcome, Admin-DC User!]
+
+[Total Tests: 50]      [Total Diagnostic Centers: 20]      [Total Users: 100]
+
+[Recent Test Bills]
+----------------------------------------
+|  Bill ID |  Diagnostic Center |  Date    |
+----------------------------------------
+|  001     |  ABC Diagnostics   |  2023-06-10 |
+|  002     |  XYZ Labs          |  2023-06-12 |
+|  003     |  DEF Diagnostics   |  2023-06-15 |
+|  ...    |  ...               |  ...       |
+----------------------------------------
+
+[Quick Actions]
+- Add New Diagnostic Test
+- Generate Report
+
+-----------------------------------------------------
+                        Tests
+-----------------------------------------------------
+
+[Add New Test]
+
+[Tests List]
+----------------------------------------
+|  Test ID |  Test Name    |  Category  |
+----------------------------------------
+|  001     |  Blood Test   |  Pathology |
+|  002     |  X-Ray        |  Radiology |
+|  003     |  MRI Scan     |  Imaging   |
+|  ...    |  ...          |  ...       |
+----------------------------------------
+
+[Actions: Edit | Delete]
+
+-----------------------------------------------------
+          Diagnostic Center Users
+-----------------------------------------------------
+
+[Add New Diagnostic Center User]
+
+[Diagnostic Center Users List]
+---------------------------------
+|  Username  |  Role  |  Actions |
+---------------------------------
+|  user1     |  Admin-DC |  Edit  |
+|  user2     |  Staff    |  Edit  |
+|  user3     |  Staff    |  Edit  |
+|  ...      |  ...      |  ...   |
+---------------------------------
+
+[Roles & Permissions]
+
+-----------------------------------------------------
+                       Reports
+-----------------------------------------------------
+
+[Generate Test Report]
+[Generate Bill Report]
+[Generate Center Report]
+
+-----------------------------------------------------
