@@ -1,0 +1,250 @@
+Hospital Management System queries 
+
+
+--creating Tables
+-- Specializations
+CREATE TABLE Specializations (
+  spec_id char(4) PRIMARY KEY,
+  spec_title varchar(20),
+  spec_desc varchar(200)
+);
+
+-- Doctors
+CREATE TABLE Doctors (
+  doct_id serial PRIMARY KEY,
+  doct_name varchar,
+  doct_qual varchar(20),
+  doct_spec_id char(4) REFERENCES Specializations(spec_id),
+  doct_exp numeric,
+  doct_photo varchar(50),
+  doct_cfee numeric
+);
+
+-- DoctorSchedule
+CREATE TABLE DoctorSchedule (
+  doct_id int REFERENCES Doctors(doct_id),
+  weekday char(3),
+  dcsc_timefrom char(4),
+  dcsc_timeto char(4),
+  dcsc_avgat numeric
+);
+
+-- Appointments
+CREATE TABLE Appointments (
+  appn_id serial PRIMARY KEY,
+  appn_doct_id int REFERENCES Doctors(doct_id),
+  appn_patn_id int REFERENCES Patients(patn_id),
+  appn_booked_Date timestamp,
+  appn_sch_date timestamp,
+  appn_paymode varchar(20),
+  appn_payreference varchar(50),
+  appn_payamount numeric,
+  appn_status char(4)
+);
+
+-- Patients
+CREATE TABLE Patients (
+  patn_id serial PRIMARY KEY,
+  patn_name varchar(100),
+  patn_age int,
+  patn_gender varchar(10),
+  patn_bgroup char(2),
+  patn_rdate date,
+  patn_lastvisit date,
+  patn_lastapp_id int REFERENCES Appointments(appn_id)
+);
+
+-- PatientFamilyMembers
+CREATE TABLE PatientFamilyMembers (
+  patn_id int REFERENCES Patients(patn_id),
+  pfmb_index smallint,
+  pfmb_name varchar(50),
+  pfmb_relation varchar(50),
+  pfmb_age smallint
+);
+
+-- PatientMedicalProfile
+CREATE TABLE PatientMedicalProfile (
+  patn_id int REFERENCES Patients(patn_id),
+  patn_appn_id int REFERENCES Appointments(appn_id),
+  patn_parameter varchar(50),
+  patn_pargroup varchar(50),
+  patn_value varchar(100)
+);
+
+-- Tests
+CREATE TABLE Tests (
+  test_id serial PRIMARY KEY,
+  test_name varchar(100),
+  test_catg_id char(6),
+  test_price numeric,
+  test_method varchar(100),
+  test_normalrangefrom varchar(100),
+  test_normalrangeto varchar(100)
+);
+
+-- PatientDiagnosis
+CREATE TABLE PatientDiagnosis (
+  dgbl_id serial PRIMARY KEY,
+  dgbl_patn_id int REFERENCES Patients(patn_id),
+  dgbl_date date,
+  dgbl_amount numeric,
+  dgbl_appn_id int REFERENCES Appointments(appn_id)
+);
+
+-- PatientDiagnosticTests
+CREATE TABLE PatientDiagnosticTests (
+  dgbl_id int REFERENCES PatientDiagnosis(dgbl_id),
+  dgbl_test_id int REFERENCES Tests(test_id),
+  dgbl_test_price numeric
+);
+
+-- PatientDiagnosticReports
+CREATE TABLE PatientDiagnosticReports (
+  dgbl_id int REFERENCES PatientDiagnosis(dgbl_id),
+  dgdr_index smallint,
+  dgdr_path varchar(100)
+);
+
+
+
+--inserting table sample data
+
+-- Specializations
+INSERT INTO Specializations (spec_id, spec_title, spec_desc) VALUES
+  ('ENT', 'ENT', 'Ear, Nose, and Throat'),
+  ('CARD', 'Cardiology', 'Cardiology Specialization'),
+  ('ORTH', 'Orthopedic', 'Orthopedic Specialization'),
+  ('GNRL', 'General Physician', 'General Physician Specialization'),
+  ('GASE', 'Gastroenterology', 'Gastroenterology Specialization'),
+  ('NUER', 'Neurology', 'Neurology Specialization');
+
+-- Doctors
+INSERT INTO Doctors (doct_name, doct_qual, doct_spec_id, doct_exp, doct_photo, doct_cfee) VALUES
+  ('Dr. John Smith', 'MD', 'ENT', 10, 'photo1.jpg', 100),
+  ('Dr. Emily Johnson', 'MD', 'CARD', 8, 'photo2.jpg', 150),
+  ('Dr. Robert Davis', 'MS', 'ORTH', 12, 'photo3.jpg', 200),
+  ('Dr. Sarah Wilson', 'MBBS', 'GNRL', 6, 'photo4.jpg', 80),
+  ('Dr. Michael Brown', 'MD', 'GASE', 15, 'photo5.jpg', 120),
+  ('Dr. Jessica Lee', 'MD', 'ENT', 9, 'photo6.jpg', 90),
+  ('Dr. Christopher Clark', 'MS', 'ORTH', 10, 'photo7.jpg', 180),
+  ('Dr. Olivia Taylor', 'MBBS', 'GNRL', 5, 'photo8.jpg', 70),
+  ('Dr. Ethan Hall', 'MD', 'CARD', 7, 'photo9.jpg', 130),
+  ('Dr. Samantha Moore', 'MD', 'GASE', 11, 'photo10.jpg', 110);
+
+-- DoctorSchedule
+INSERT INTO DoctorSchedule (doct_id, weekday, dcsc_timefrom, dcsc_timeto, dcsc_avgat) VALUES
+  (1, 'MON', '1030', '1330', 30),
+  (2, 'TUE', '0930', '1130', 20),
+  (3, 'WED', '1400', '1700', 30),
+  (4, 'THU', '1100', '1300', 30),
+  (5, 'FRI', '0900', '1100', 20),
+  (6, 'MON', '1430', '1630', 20),
+  (7, 'TUE', '1300', '1500', 30),
+  (8, 'WED', '0900', '1200', 30),
+  (9, 'THU', '1600', '1800', 20),
+  (10, 'FRI', '1200', '1400', 30);
+
+-- Appointments
+INSERT INTO Appointments (appn_doct_id, appn_patn_id, appn_booked_Date, appn_sch_date, appn_paymode, appn_payreference, appn_payamount, appn_status) VALUES
+  (1, 1, '2023-06-01 10:00:00', '2023-06-05 10:30:00', 'Card', '123456789', 100, 'YETO'),
+  (2, 2, '2023-06-01 11:00:00', '2023-06-06 09:30:00', 'Cash', NULL, 150, 'YETO'),
+  (3, 3, '2023-06-02 15:30:00', '2023-06-08 14:00:00', 'Card', '987654321', 200, 'YETO'),
+  (4, 4, '2023-06-03 12:30:00', '2023-06-07 11:00:00', 'Card', '456789123', 80, 'YETO'),
+  (5, 5, '2023-06-04 09:00:00', '2023-06-09 09:30:00', 'Cash', NULL, 120, 'YETO'),
+  (6, 6, '2023-06-05 14:30:00', '2023-06-10 14:00:00', 'Card', '654789321', 90, 'YETO'),
+  (7, 7, '2023-06-06 13:00:00', '2023-06-11 13:30:00', 'Card', '987321654', 180, 'YETO'),
+  (8, 8, '2023-06-07 09:30:00', '2023-06-12 11:00:00', 'Cash', NULL, 70, 'YETO'),
+  (9, 9, '2023-06-08 16:00:00', '2023-06-13 16:30:00', 'Card', '789654123', 130, 'YETO'),
+  (10, 10, '2023-06-09 12:00:00', '2023-06-14 12:30:00', 'Card', '321987654', 110, 'YETO');
+
+-- Patients
+INSERT INTO Patients (patn_name, patn_age, patn_gender, patn_bgroup, patn_rdate, patn_lastvisit, patn_lastapp_id) VALUES
+  ('John Doe', 30, 'Male', 'A+', '2023-05-15', '2023-06-03', 4),
+  ('Emma Johnson', 45, 'Female', 'O-', '2023-05-16', '2023-06-02', 3),
+  ('Michael Williams', 55, 'Male', 'B+', '2023-05-17', '2023-06-01', 1),
+  ('Sophia Anderson', 28, 'Female', 'AB-', '2023-05-18', '2023-06-04', 5),
+  ('Daniel Wilson', 62, 'Male', 'O+', '2023-05-19', '2023-06-05', 6),
+  ('Olivia Thompson', 42, 'Female', 'A-', '2023-05-20', '2023-06-06', 2),
+  ('James Harris', 36, 'Male', 'B-', '2023-05-21', '2023-06-07', 7),
+  ('Ava Davis', 48, 'Female', 'AB+', '2023-05-22', '2023-06-08', 8),
+  ('William Martin', 50, 'Male', 'O-', '2023-05-23', '2023-06-09', 9),
+  ('Emily Jackson', 31, 'Female', 'A+', '2023-05-24', '2023-06-10', 10);
+
+-- PatientFamilymembers
+INSERT INTO PatientFamilymembers (patn_id, pfmb_index, pfmb_name, pfmb_relation, pfmb_age) VALUES
+  (1, 1, 'Jane Doe', 'Spouse', 28),
+  (1, 2, 'Sarah Doe', 'Child', 5),
+  (2, 1, 'John Johnson', 'Spouse', 50),
+  (3, 1, 'David Williams', 'Spouse', 57),
+  (3, 2, 'Lily Williams', 'Child', 25),
+  (4, 1, 'Ben Anderson', 'Spouse', 30),
+  (5, 1, 'Mary Wilson', 'Spouse', 60),
+  (5, 2, 'Emma Wilson', 'Child', 35),
+  (6, 1, 'Ethan Thompson', 'Spouse', 40),
+  (6, 2, 'Sophie Thompson', 'Child', 15);
+
+-- PatientMedicalProfile
+INSERT INTO PatientMedicalProfile (patn_id, patn_appn_id, patn_parameter, patn_pargroup, patn_value) VALUES
+  (1, 4, 'Weight', 'General', '70 kg'),
+  (2, 3, 'Blood Pressure', 'BP', '120/80 mmHg'),
+  (3, 1, 'Cholesterol', 'General', '200 mg/dL'),
+  (4, 5, 'Weight', 'General', '65 kg'),
+  (5, 6, 'Blood Pressure', 'BP', '130/90 mmHg'),
+  (6, 2, 'Cholesterol', 'General', '180 mg/dL'),
+  (7, 7, 'Weight', 'General', '80 kg'),
+  (8, 8, 'Blood Pressure', 'BP', '140/95 mmHg'),
+  (9, 9, 'Cholesterol', 'General', '220 mg/dL'),
+  (10, 10, 'Weight', 'General', '75 kg');
+
+-- Tests
+INSERT INTO Tests (test_name, test_catg_id, test_price, test_method, test_normalrangefrom, test_normalrangeto) VALUES
+  ('Blood Test', 'CATG01', 50, 'Blood Sample', '70', '100'),
+  ('X-Ray', 'CATG02', 100, 'Radiography', NULL, NULL),
+  ('MRI Scan', 'CATG02', 300, 'Magnetic Resonance Imaging', NULL, NULL),
+  ('ECG', 'CATG03', 80, 'Electrocardiogram', NULL, NULL),
+  ('Ultrasound', 'CATG02', 150, 'Sonography', NULL, NULL),
+  ('CT Scan', 'CATG02', 200, 'Computed Tomography', NULL, NULL),
+  ('Urinalysis', 'CATG01', 40, 'Urine Sample', NULL, NULL),
+  ('Stress Test', 'CATG03', 120, 'Exercise Test', NULL, NULL),
+  ('Colonoscopy', 'CATG02', 250, 'Endoscopy', NULL, NULL),
+  ('Lipid Profile', 'CATG01', 60, 'Blood Sample', '100', '200');
+
+-- PatientDiagnosis
+INSERT INTO PatientDiagnosis (dgbl_patn_id, dgbl_date, dgbl_amount, dgbl_appn_id) VALUES
+  (1, '2023-06-03', 200, 4),
+  (2, '2023-06-02', 150, 3),
+  (3, '2023-06-08', 300, 1),
+  (4, '2023-06-07', 100, 5),
+  (5, '2023-06-09', 120, 6),
+  (6, '2023-06-10', 180, 2),
+  (7, '2023-06-11', 80, 7),
+  (8, '2023-06-12', 150, 8),
+  (9, '2023-06-13', 220, 9),
+  (10, '2023-06-14', 200, 10);
+
+-- PatientDiagnosticTests
+INSERT INTO PatientDiagnosticTests (dgbl_id, dgbl_test_id, dgbl_test_price) VALUES
+  (1, 1, 50),
+  (2, 2, 100),
+  (3, 3, 300),
+  (4, 4, 80),
+  (5, 5, 150),
+  (6, 6, 200),
+  (7, 7, 40),
+  (8, 8, 120),
+  (9, 9, 250),
+  (10, 10, 60);
+
+-- PatientDiagnosticReports
+INSERT INTO PatientDiagnosticReports (dgbl_id, dgdr_index, dgdr_path) VALUES
+  (1, 1, 'report1.pdf'),
+  (1, 2, 'report2.pdf'),
+  (2, 1, 'report3.pdf'),
+  (3, 1, 'report4.pdf'),
+  (4, 1, 'report5.pdf'),
+  (5, 1, 'report6.pdf'),
+  (6, 1, 'report7.pdf'),
+  (7, 1, 'report8.pdf'),
+  (8, 1, 'report9.pdf'),
+  (9, 1, 'report10.pdf');

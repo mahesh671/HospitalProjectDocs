@@ -1,0 +1,115 @@
+
+--creating Tables
+-- Specializations
+CREATE TABLE Specializations (
+  spec_id char(4) PRIMARY KEY,
+  spec_title varchar(20),
+  spec_desc varchar(200)
+);
+
+
+-- Doctors
+CREATE TABLE Doctors (
+  doct_id serial PRIMARY KEY,
+  doct_name varchar,
+  doct_qual varchar(20),
+  doct_spec_id char(4) REFERENCES Specializations(spec_id),
+  doct_exp numeric,
+  doct_photo varchar(50),
+  doct_cfee numeric
+);
+
+-- Create Patients table first without reference to Appointments
+CREATE TABLE Patients (
+  patn_id serial PRIMARY KEY,
+  patn_name varchar(100),
+  patn_age int,
+  patn_gender varchar(10),
+  patn_bgroup char(4),
+  patn_rdate date,
+  patn_lastvisit date,
+  patn_lastapp_id int
+);
+
+-- Create Appointments table next
+CREATE TABLE Appointments (
+  appn_id serial PRIMARY KEY,
+  appn_doct_id int REFERENCES Doctors(doct_id),
+  appn_patn_id int REFERENCES Patients(patn_id),
+  appn_booked_Date timestamp,
+  appn_sch_date timestamp,
+  appn_paymode varchar(20),
+  appn_payreference varchar(50),
+  appn_payamount numeric,
+  appn_status char(4)
+);
+
+-- Alter Patients table to add foreign key constraint
+ALTER TABLE Patients
+ADD CONSTRAINT FK_Patients_Appointments
+FOREIGN KEY (patn_lastapp_id)
+REFERENCES Appointments(appn_id);
+-- DoctorSchedule
+CREATE TABLE DoctorSchedule (
+  doct_id int REFERENCES Doctors(doct_id),
+  weekday char(3),
+  dcsc_timefrom char(4),
+  dcsc_timeto char(4),
+  dcsc_avgat numeric
+);
+
+
+
+
+
+-- PatientFamilyMembers
+CREATE TABLE PatientFamilyMembers (
+  patn_id int REFERENCES Patients(patn_id),
+  pfmb_index smallint,
+  pfmb_name varchar(50),
+  pfmb_relation varchar(50),
+  pfmb_age smallint
+);
+
+-- PatientMedicalProfile
+CREATE TABLE PatientMedicalProfile (
+  patn_id int REFERENCES Patients(patn_id),
+  patn_appn_id int REFERENCES Appointments(appn_id),
+  patn_parameter varchar(50),
+  patn_pargroup varchar(50),
+  patn_value varchar(100)
+);
+
+-- Tests
+CREATE TABLE Tests (
+  test_id serial PRIMARY KEY,
+  test_name varchar(100),
+  test_catg_id char(6),
+  test_price numeric,
+  test_method varchar(100),
+  test_normalrangefrom varchar(100),
+  test_normalrangeto varchar(100)
+);
+
+-- PatientDiagnosis
+CREATE TABLE PatientDiagnosis (
+  dgbl_id serial PRIMARY KEY,
+  dgbl_patn_id int REFERENCES Patients(patn_id),
+  dgbl_date date,
+  dgbl_amount numeric,
+  dgbl_appn_id int REFERENCES Appointments(appn_id)
+);
+
+-- PatientDiagnosticTests
+CREATE TABLE PatientDiagnosticTests (
+  dgbl_id int REFERENCES PatientDiagnosis(dgbl_id),
+  dgbl_test_id int REFERENCES Tests(test_id),
+  dgbl_test_price numeric
+);
+
+-- PatientDiagnosticReports
+CREATE TABLE PatientDiagnosticReports (
+  dgbl_id int REFERENCES PatientDiagnosis(dgbl_id),
+  dgdr_index smallint,
+  dgdr_path varchar(100)
+);
