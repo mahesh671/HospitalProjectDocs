@@ -1,110 +1,6 @@
-Hospital Management System queries 
+--Hospital Management System queries 
 
 
---creating Tables
--- Specializations
-CREATE TABLE Specializations (
-  spec_id char(4) PRIMARY KEY,
-  spec_title varchar(20),
-  spec_desc varchar(200)
-);
-
--- Doctors
-CREATE TABLE Doctors (
-  doct_id serial PRIMARY KEY,
-  doct_name varchar,
-  doct_qual varchar(20),
-  doct_spec_id char(4) REFERENCES Specializations(spec_id),
-  doct_exp numeric,
-  doct_photo varchar(50),
-  doct_cfee numeric
-);
-
--- DoctorSchedule
-CREATE TABLE DoctorSchedule (
-  doct_id int REFERENCES Doctors(doct_id),
-  weekday char(3),
-  dcsc_timefrom char(4),
-  dcsc_timeto char(4),
-  dcsc_avgat numeric
-);
-
--- Appointments
-CREATE TABLE Appointments (
-  appn_id serial PRIMARY KEY,
-  appn_doct_id int REFERENCES Doctors(doct_id),
-  appn_patn_id int REFERENCES Patients(patn_id),
-  appn_booked_Date timestamp,
-  appn_sch_date timestamp,
-  appn_paymode varchar(20),
-  appn_payreference varchar(50),
-  appn_payamount numeric,
-  appn_status char(4)
-);
-
--- Patients
-CREATE TABLE Patients (
-  patn_id serial PRIMARY KEY,
-  patn_name varchar(100),
-  patn_age int,
-  patn_gender varchar(10),
-  patn_bgroup char(2),
-  patn_rdate date,
-  patn_lastvisit date,
-  patn_lastapp_id int REFERENCES Appointments(appn_id)
-);
-
--- PatientFamilyMembers
-CREATE TABLE PatientFamilyMembers (
-  patn_id int REFERENCES Patients(patn_id),
-  pfmb_index smallint,
-  pfmb_name varchar(50),
-  pfmb_relation varchar(50),
-  pfmb_age smallint
-);
-
--- PatientMedicalProfile
-CREATE TABLE PatientMedicalProfile (
-  patn_id int REFERENCES Patients(patn_id),
-  patn_appn_id int REFERENCES Appointments(appn_id),
-  patn_parameter varchar(50),
-  patn_pargroup varchar(50),
-  patn_value varchar(100)
-);
-
--- Tests
-CREATE TABLE Tests (
-  test_id serial PRIMARY KEY,
-  test_name varchar(100),
-  test_catg_id char(6),
-  test_price numeric,
-  test_method varchar(100),
-  test_normalrangefrom varchar(100),
-  test_normalrangeto varchar(100)
-);
-
--- PatientDiagnosis
-CREATE TABLE PatientDiagnosis (
-  dgbl_id serial PRIMARY KEY,
-  dgbl_patn_id int REFERENCES Patients(patn_id),
-  dgbl_date date,
-  dgbl_amount numeric,
-  dgbl_appn_id int REFERENCES Appointments(appn_id)
-);
-
--- PatientDiagnosticTests
-CREATE TABLE PatientDiagnosticTests (
-  dgbl_id int REFERENCES PatientDiagnosis(dgbl_id),
-  dgbl_test_id int REFERENCES Tests(test_id),
-  dgbl_test_price numeric
-);
-
--- PatientDiagnosticReports
-CREATE TABLE PatientDiagnosticReports (
-  dgbl_id int REFERENCES PatientDiagnosis(dgbl_id),
-  dgdr_index smallint,
-  dgdr_path varchar(100)
-);
 
 
 
@@ -132,6 +28,7 @@ INSERT INTO Doctors (doct_name, doct_qual, doct_spec_id, doct_exp, doct_photo, d
   ('Dr. Ethan Hall', 'MD', 'CARD', 7, 'photo9.jpg', 130),
   ('Dr. Samantha Moore', 'MD', 'GASE', 11, 'photo10.jpg', 110);
 
+--select * from doctors
 -- DoctorSchedule
 INSERT INTO DoctorSchedule (doct_id, weekday, dcsc_timefrom, dcsc_timeto, dcsc_avgat) VALUES
   (1, 'MON', '1030', '1330', 30),
@@ -145,6 +42,23 @@ INSERT INTO DoctorSchedule (doct_id, weekday, dcsc_timefrom, dcsc_timeto, dcsc_a
   (9, 'THU', '1600', '1800', 20),
   (10, 'FRI', '1200', '1400', 30);
 
+
+--alter table Patients alter column patn_bgroup type varchar(4)
+
+-- Patients
+INSERT INTO Patients (patn_name, patn_age, patn_gender, patn_bgroup, patn_rdate, patn_lastvisit, patn_lastapp_id) VALUES
+  ('John Doe', 30, 'Male', 'A+', '2023-05-15', NULL, NULL),
+  ('Emma Johnson', 45, 'Female', 'O-', '2023-05-16', NULL, NULL),
+  ('Michael Williams', 55, 'Male', 'B+', '2023-05-17', NULL, NULL),
+  ('Sophia Anderson', 28, 'Female', 'AB-', '2023-05-18', NULL, NULL),
+  ('Daniel Wilson', 62, 'Male', 'O+', '2023-05-19', NULL, NULL),
+  ('Olivia Thompson', 42, 'Female', 'A-', '2023-05-20', NULL, NULL),
+  ('James Harris', 36, 'Male', 'B-', '2023-05-21', NULL, NULL),
+  ('Ava Davis', 48, 'Female', 'AB+', '2023-05-22', NULL, NULL),
+  ('William Martin', 50, 'Male', 'O-', '2023-05-23', NULL, NULL),
+  ('Emily Jackson', 31, 'Female', 'A+', '2023-05-24', NULL, NULL);
+
+--select * from Patients
 -- Appointments
 INSERT INTO Appointments (appn_doct_id, appn_patn_id, appn_booked_Date, appn_sch_date, appn_paymode, appn_payreference, appn_payamount, appn_status) VALUES
   (1, 1, '2023-06-01 10:00:00', '2023-06-05 10:30:00', 'Card', '123456789', 100, 'YETO'),
@@ -157,19 +71,42 @@ INSERT INTO Appointments (appn_doct_id, appn_patn_id, appn_booked_Date, appn_sch
   (8, 8, '2023-06-07 09:30:00', '2023-06-12 11:00:00', 'Cash', NULL, 70, 'YETO'),
   (9, 9, '2023-06-08 16:00:00', '2023-06-13 16:30:00', 'Card', '789654123', 130, 'YETO'),
   (10, 10, '2023-06-09 12:00:00', '2023-06-14 12:30:00', 'Card', '321987654', 110, 'YETO');
+delete from appointments
+select * from appointments
+ALTER SEQUENCE appointments_appn_id_seq RESTART WITH 1;
+--patients update
+UPDATE Patients
+SET 
+  patn_lastvisit = 
+    CASE 
+      WHEN patn_id = 1 THEN '2023-06-03'
+      WHEN patn_id = 2 THEN '2023-06-02'
+      WHEN patn_id = 3 THEN '2023-06-01'
+      WHEN patn_id = 4 THEN '2023-06-04'
+      WHEN patn_id = 5 THEN '2023-06-05'
+      WHEN patn_id = 6 THEN '2023-06-06'
+      WHEN patn_id = 7 THEN '2023-06-07'
+      WHEN patn_id = 8 THEN '2023-06-08'
+      WHEN patn_id = 9 THEN '2023-06-09'
+      WHEN patn_id = 10 THEN '2023-06-10'
+      ELSE patn_lastvisit
+    END,
+  patn_lastapp_id = 
+    CASE 
+      WHEN patn_id = 1 THEN 4
+      WHEN patn_id = 2 THEN 3
+      WHEN patn_id = 3 THEN 1
+      WHEN patn_id = 4 THEN 5
+      WHEN patn_id = 5 THEN 6
+      WHEN patn_id = 6 THEN 2
+      WHEN patn_id = 7 THEN 7
+      WHEN patn_id = 8 THEN 8
+      WHEN patn_id = 9 THEN 9
+      WHEN patn_id = 10 THEN 10
+      ELSE patn_lastapp_id
+    END;
 
--- Patients
-INSERT INTO Patients (patn_name, patn_age, patn_gender, patn_bgroup, patn_rdate, patn_lastvisit, patn_lastapp_id) VALUES
-  ('John Doe', 30, 'Male', 'A+', '2023-05-15', '2023-06-03', 4),
-  ('Emma Johnson', 45, 'Female', 'O-', '2023-05-16', '2023-06-02', 3),
-  ('Michael Williams', 55, 'Male', 'B+', '2023-05-17', '2023-06-01', 1),
-  ('Sophia Anderson', 28, 'Female', 'AB-', '2023-05-18', '2023-06-04', 5),
-  ('Daniel Wilson', 62, 'Male', 'O+', '2023-05-19', '2023-06-05', 6),
-  ('Olivia Thompson', 42, 'Female', 'A-', '2023-05-20', '2023-06-06', 2),
-  ('James Harris', 36, 'Male', 'B-', '2023-05-21', '2023-06-07', 7),
-  ('Ava Davis', 48, 'Female', 'AB+', '2023-05-22', '2023-06-08', 8),
-  ('William Martin', 50, 'Male', 'O-', '2023-05-23', '2023-06-09', 9),
-  ('Emily Jackson', 31, 'Female', 'A+', '2023-05-24', '2023-06-10', 10);
+
 
 -- PatientFamilymembers
 INSERT INTO PatientFamilymembers (patn_id, pfmb_index, pfmb_name, pfmb_relation, pfmb_age) VALUES
@@ -183,7 +120,7 @@ INSERT INTO PatientFamilymembers (patn_id, pfmb_index, pfmb_name, pfmb_relation,
   (5, 2, 'Emma Wilson', 'Child', 35),
   (6, 1, 'Ethan Thompson', 'Spouse', 40),
   (6, 2, 'Sophie Thompson', 'Child', 15);
-
+select * from PatientFamilymembers
 -- PatientMedicalProfile
 INSERT INTO PatientMedicalProfile (patn_id, patn_appn_id, patn_parameter, patn_pargroup, patn_value) VALUES
   (1, 4, 'Weight', 'General', '70 kg'),
