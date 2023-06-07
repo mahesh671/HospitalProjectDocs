@@ -59,6 +59,6 @@
 
 [Generate Test Report]
 [Generate Bill Report]
-[Generate Center Report]
+
 
 -----------------------------------------------------
