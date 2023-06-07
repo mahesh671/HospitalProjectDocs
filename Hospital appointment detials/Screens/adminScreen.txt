@@ -8,7 +8,7 @@
                         Navigation
 -----------------------------------------------------
 
-[Dashboard]    [Appointments]    [Doctors]    [Specializations]    [Reports]    [User Management]
+[Dashboard]    [Appointments]    [Doctors]    [Specializations]    [Reports]    
 
 -----------------------------------------------------
                       Admin Dashboard
@@ -107,22 +107,3 @@
 [Generate Payment Report]
 [Generate Doctor Report]
 
------------------------------------------------------
-                 User Management
------------------------------------------------------
-
-[Add New Admin User]
-
-[Admin Users List]
----------------------------------
-|  Username  |  Role  |  Actions |
----------------------------------
-|  admin1    |  Admin |  Edit    |
-|  admin2    |  Staff |  Edit    |
-|  admin3    |  Staff |  Edit    |
-|  ...      |  ...   |  ...     |
----------------------------------
-
-[Roles & Permissions]
-
------------------------------------------------------
