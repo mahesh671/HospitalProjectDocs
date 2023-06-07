@@ -16,11 +16,11 @@
 
 [Welcome, Admin-DC User!]
 
-[Total Tests: 50]      [Total Diagnostic Centers: 20]      [Total Users: 100]
+[Total Tests: 50]        [Total Users: 100]
 
 [Recent Test Bills]
 ----------------------------------------
-|  Bill ID |  Diagnostic Center |  Date    |
+|  Bill ID |  Diagnostic Test Type |  Date    |
 ----------------------------------------
 |  001     |  ABC Diagnostics   |  2023-06-10 |
 |  002     |  XYZ Labs          |  2023-06-12 |
@@ -51,22 +51,7 @@
 [Actions: Edit | Delete]
 
 -----------------------------------------------------
-          Diagnostic Center Users
------------------------------------------------------
 
-[Add New Diagnostic Center User]
-
-[Diagnostic Center Users List]
----------------------------------
-|  Username  |  Role  |  Actions |
----------------------------------
-|  user1     |  Admin-DC |  Edit  |
-|  user2     |  Staff    |  Edit  |
-|  user3     |  Staff    |  Edit  |
-|  ...      |  ...      |  ...   |
----------------------------------
-
-[Roles & Permissions]
 
 -----------------------------------------------------
                        Reports
