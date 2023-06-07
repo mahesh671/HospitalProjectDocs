@@ -35,7 +35,8 @@
 |  003        |  Dr. Lee     |  $80     |
 |  ...       |  ...         |  ...     |
 ----------------------------------------
-
+[Recent Report Status]
+Patient and patient family reports
 [Quick Actions]
 - Schedule Appointment
 - Update Profile
@@ -58,7 +59,7 @@
 |  003            |  Dr. Lee     |  2023-06-15 |
 |  ...           |  ...          |  ...       |
 ----------------------------------------
-
+[Upcoming Appointment List Table] 
 [Actions: Reschedule | Cancel]
 
 -----------------------------------------------------
