@@ -1,4 +1,3 @@
-
 Doctor Appointment Booking System Database	
 	-31stMay2023
 
@@ -36,42 +35,46 @@ appn_id			int		PK_APPN
 appn_doct_id		int
 appn_patn_id		int
 appn_booked_Date	datetime
-appn_sch_date		datetime
+appn_sch_date_from	datetime
+appn_sch_date_to	datetime
 appn_paymode		varchar(20)
 appn_payreference	varchar(50)
 appn_payamount		numeric
+appn_nextrecommend_date	date		//next recommended date
 appn_status		char(4)		YETO/CMPLD/NTRN
 
 
 Patients
-This table stores all Patient details
+This table stores all Patient details. Here all family members will have patn_access_patn_id mapped to key member of the family by giving key member id as reference here. For key member it would be null.
 
-patn_id			int
+patn_id			int		PK_PATN
 patn_name		v(100)
-patn_age
-patn_gender
+patn_age		tinyint
+patn_gender		c(1)
+patn_access_patn_id	int		FK(PK_PATN)
 patn_bgroup		char(2)
 patn_rdate		date		//reg date
 patn_lastvisit		date
 patn_lastapp_id		int		
 
 PatientFamilymembers
-This table stores various family members associated with PAtients
+This table stores various family members associated with PAtients. First time when key member (who has system/app access) registers he will be created as patient. All his/her family members fed can have entries here but they will not be created as patients until unless you book an appointment for them. Here only keymembers will have master patient entry, other family member patient ids will be entered as normal patients. 
 
-patn_id			int
-pfmb_index		tinyint
+patn_id			int		
+pfmb_index		tinyint		CPK(1,2)	, auto increments from 1
 pfmb_name		v(50)
 pfmb_relation		v(50)
 pfmb_age		smallint
 
-PatientMedicalProfile
+PatientMedicalProfile	-EMR/EHR
 This table stores all Parameters of patients
 
 patn_id			int
 patn_appn_id		int		FK
-patn_parameter		varchar(50)		Weight/BP/Cholestral
+patn_parameter		varchar(50)	Weight/BP/Cholestral	CPK(1,2,3)
 patn_pargroup		varchar(50)	BP/GEN/
 patn_value		varchar(100)
+patn_prescription	image		//prescription image
 
 
 Tests
@@ -92,7 +95,20 @@ dgbl_id			int
 dgbl_patn_id		int		FK(PK_PATN)
 dgbl_date		date
 dgbl_amount		numeric		//total amount
-dgbl_appn_id		int		can be null
+dgbl_patn_type		c(4)		APPN/OUTP
+
+AppointmentConnectedPatients
+This table stores appointment based patients
+
+dgbl_id			int		
+apcp_appn_id		int		CPK(1,2)
+
+AppointmentLessPatients
+This table stores appointment less patients
+
+dgbl_id			int		
+apcp_patn_id		int		CPK(1,2)
+
 
 PatientDianogisticTests
 This table maps different test carried under dianognosis.
@@ -105,5 +121,5 @@ PatientDiagnonisticReports
 This table maps report pdfs
 
 dgbl_id			int
-dgdr_index		tinyint
+dgdr_index		tinyint		CPK(1,2)		auto increment with 1
 dgdr_path		v(100)
