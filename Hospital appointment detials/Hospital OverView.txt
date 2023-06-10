@@ -10,10 +10,17 @@ Diagnostic Center Users
 		***** Options for Admin Users ******
 
 Sign In
-	Sign Up
+	/Sign Up
 	Sign In
 	Change pwd
 	Forgot pwd
+
+Dashboard
+	-Summary counts
+		-Appointments specialization wise, Doctor Wise
+		-Revenue generated Date Wise, date range wise(default current date/current week)
+		-Some graphs on appointments specialization wise
+		-Some graphs on Diagnostic center usage
 
 Master Entry
 	Specializations
@@ -22,6 +29,7 @@ Master Entry
 		- Feeding Doctors and their specializations
 		- Doctors Schedule
 		- Flexibility - Week day wise, different time slots
+		- Doctor wise REvenue Share
 Appointments
 
 	Booked Appointments
@@ -35,38 +43,50 @@ Appointments
 			- Book the appointment and make the payment
 			- Appointment for self or family member
 	Patient Profile Update
-		- Post Consultation Update
+		- Post Consultation Update like prescription scanned image update
+		- next appointment updates
+		- Other important parameters to be stored as EMR/EHR
 	
-	Payments
+Payments
+	- Consultation/DC wise
 		- Doctor Wise
-		- Date Wise
+		- Date range Wise
+		- Dept/Specialization Wise
+		- Test Category Wise
+	- Revenue Split
+		-
+
 
 Reports
 
+	
 
 		***** Options for Admin-DC Users ******
 
 Sign In
-	Sign Up
+	//Sign Up
 	Sign In
 	Change pwd
 	Forgot pwd
 
 Master Entry
-	Test Categories
+	Test Categories(Category for report maping purpose)
 		- Info
 	Tests
 		- Master Info
+		-Test Details, method of test, price, normal range
+
 Diagnostic Tests
 	- NEw Test Bills
 		- User should be able to select various tests
 		- Based on that bill has to be generated.
+
 	- Test Reports
-		- Feed/Upload Test Reports
-		- Associated PAtient details
+		- Feed/Upload Test Reports (only direct pdf upload feature)
+		- Associated PAtient details(Linking the report document to the respective patient)
 
 Patients
-	Patients View
+	-Patients View
 		- Test Wise
 		- Between Dates	
 
@@ -92,7 +112,7 @@ Dashboard
 		- Completed
 			- Completed Bookings
 		- Upcoming			
-			- Here all upcoming bookings
+			-Here all upcoming bookings
 			-Reschedule/Postpone appointment
 		- New Appointment
 			- Available Schedule on a specfic date & time *****
@@ -102,9 +122,13 @@ Dashboard
 		- Patient Profile
 		- Patient family members
 			- View members
+				-view family member profile
 			- Add members/edit/delete
 		
-	Diagnostic Test
-		- Various Tests 
-		- Test Reports
+	Diagnostic Tests
+		- Various Tests done earlier
+			- Test Reports of those tests
+		-
 
+Note: Either Appointment or Test details should have payment info also
+		-Invoice also
